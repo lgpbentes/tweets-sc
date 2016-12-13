@@ -106,6 +106,56 @@ class TweetController extends Controller
         return $this->redirect(['index']);
     }
 
+    public function actionVerdadeiro($id){
+        $tweet = Tweet::findOne($id);
+        $qtAtual = $tweet->qtTrue;
+        $qtAtual++;
+
+        $idUser = Yii::$app->user->identity->getId();
+
+        $sql = "INSERT INTO user_ev_tweet (user_id, tweet_id, `type`) VALUES ('$idUser', '$id', 2)";
+        $connection = Yii::$app->getDb();
+
+        try{
+            // insere na tabela user_ev_tweet
+            $connection->createCommand($sql)->execute();
+
+            //a quantidade de verdadeiros eh atualizada
+            $sql="UPDATE tweet SET qtTrue=$qtAtual WHERE id ='$id'";
+            #return $sql;
+            $connection->createCommand($sql)->execute();
+
+
+        }catch (Exception $e){
+            return "Algo deu errado";
+        }
+
+    }
+
+    public function actionFalso($id){
+        $tweet = Tweet::findOne($id);
+        $qtAtual = $tweet->qtFalse;
+        $qtAtual++;
+
+        $idUser = Yii::$app->user->identity->getId();
+
+        $sql = "INSERT INTO user_ev_tweet (user_id, tweet_id, `type`) VALUES ('$idUser', '$id', 1)";
+        $connection = Yii::$app->getDb();
+
+        try{
+            // insere na tabela user_ev_tweet
+            $connection->createCommand($sql)->execute();
+
+            //a quantidade de verdadeiros eh atualizada
+            $sql="UPDATE tweet SET qtFalse=$qtAtual WHERE id ='$id'";
+            #return $sql;
+            $connection->createCommand($sql)->execute();
+
+        }catch (Exception $e){
+            return "Algo deu errado";
+        }
+    }
+
     /**
      * Finds the Tweet model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

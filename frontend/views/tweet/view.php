@@ -55,7 +55,16 @@ $obj = json_decode($model->content);
             <div class="clear"></div>
             <div class="w3layouts" style="background-color: white">
                 <h4><?=$obj->text?></h4>
-
+            </div>
+            <div class="clear"></div>
+            <div id="av">
+                <h3 align="center">Bot?</h3>
+                <div class="w3-agile">
+                    <button class="btn-danger" onclick="verdadeiro(<?=$model->id?>)">Sim</button>
+                </div>
+                <div class="w3-agile">
+                    <button class="btn-primary" onclick="falso(<?=$model->id?>)">Não</button>
+                </div>
             </div>
         </div>
     </div>
@@ -65,4 +74,21 @@ $obj = json_decode($model->content);
     <p class="agileinfo"> &copy; 2016 ICOMP</p>
 </div>
 </body>
+
+<script>
+    function verdadeiro(id) {
+        $.get('index.php?r=tweet/verdadeiro&id='+id, function (dados) {
+            console.log(dados)
+            document.getElementById("av").style.visibility = "hidden";        });
+    }
+    
+    function falso(id) {
+        $.get('index.php?r=tweet/falso&id='+id, function (dados) {
+            console.log(dados);
+            document.getElementById("av").style.visibility = "hidden";
+        });
+    }
+
+</script>
+
 </html>
