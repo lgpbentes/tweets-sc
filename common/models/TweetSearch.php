@@ -18,7 +18,7 @@ class TweetSearch extends Tweet
     public function rules()
     {
         return [
-            [['id', 'qtTrue', 'qtFalse'], 'integer'],
+            [['id', 'account_id1'], 'integer'],
             [['content'], 'safe'],
         ];
     }
@@ -60,8 +60,7 @@ class TweetSearch extends Tweet
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'qtTrue' => $this->qtTrue,
-            'qtFalse' => $this->qtFalse,
+            'account_id1' => $this->account_id1,
         ]);
 
         $query->andFilterWhere(['like', 'content', $this->content]);

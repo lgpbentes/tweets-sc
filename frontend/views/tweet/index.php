@@ -9,15 +9,11 @@ use yii\widgets\Pjax;
 
 $this->title = 'Tweets';
 $this->params['breadcrumbs'][] = $this->title;
-
-$obj = json_decode($searchModel->content);
-
 ?>
 <div class="tweet-index">
-     
+
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php //echo $this->render('_search', ['model' => $searchModel]); 
-    ?>
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a('Create Tweet', ['create'], ['class' => 'btn btn-success']) ?>
@@ -30,8 +26,7 @@ $obj = json_decode($searchModel->content);
 
             'id',
             'content:ntext',
-            'qtTrue',
-            'qtFalse',
+            'account_id1',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

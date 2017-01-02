@@ -47,12 +47,13 @@ class TweetController extends Controller
     /**
      * Displays a single Tweet model.
      * @param integer $id
+     * @param integer $account_id1
      * @return mixed
      */
-    public function actionView($id)
+    public function actionView($id, $account_id1)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($id, $account_id1),
         ]);
     }
 
@@ -66,7 +67,7 @@ class TweetController extends Controller
         $model = new Tweet();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->id, 'account_id1' => $model->account_id1]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -78,14 +79,15 @@ class TweetController extends Controller
      * Updates an existing Tweet model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
+     * @param integer $account_id1
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id, $account_id1)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($id, $account_id1);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->id, 'account_id1' => $model->account_id1]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -97,75 +99,27 @@ class TweetController extends Controller
      * Deletes an existing Tweet model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
+     * @param integer $account_id1
      * @return mixed
      */
-    public function actionDelete($id)
+    public function actionDelete($id, $account_id1)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($id, $account_id1)->delete();
 
         return $this->redirect(['index']);
-    }
-
-    public function actionVerdadeiro($id){
-        $tweet = Tweet::findOne($id);
-        $qtAtual = $tweet->qtTrue;
-        $qtAtual++;
-
-        $idUser = Yii::$app->user->identity->getId();
-
-        $sql = "INSERT INTO user_ev_tweet (user_id, tweet_id, `type`) VALUES ('$idUser', '$id', 2)";
-        $connection = Yii::$app->getDb();
-
-        try{
-            // insere na tabela user_ev_tweet
-            $connection->createCommand($sql)->execute();
-
-            //a quantidade de verdadeiros eh atualizada
-            $sql="UPDATE tweet SET qtTrue=$qtAtual WHERE id ='$id'";
-            #return $sql;
-            $connection->createCommand($sql)->execute();
-
-
-        }catch (Exception $e){
-            return "Algo deu errado";
-        }
-
-    }
-
-    public function actionFalso($id){
-        $tweet = Tweet::findOne($id);
-        $qtAtual = $tweet->qtFalse;
-        $qtAtual++;
-
-        $idUser = Yii::$app->user->identity->getId();
-
-        $sql = "INSERT INTO user_ev_tweet (user_id, tweet_id, `type`) VALUES ('$idUser', '$id', 1)";
-        $connection = Yii::$app->getDb();
-
-        try{
-            // insere na tabela user_ev_tweet
-            $connection->createCommand($sql)->execute();
-
-            //a quantidade de verdadeiros eh atualizada
-            $sql="UPDATE tweet SET qtFalse=$qtAtual WHERE id ='$id'";
-            #return $sql;
-            $connection->createCommand($sql)->execute();
-
-        }catch (Exception $e){
-            return "Algo deu errado";
-        }
     }
 
     /**
      * Finds the Tweet model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
+     * @param integer $account_id1
      * @return Tweet the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($id, $account_id1)
     {
-        if (($model = Tweet::findOne($id)) !== null) {
+        if (($model = Tweet::findOne(['id' => $id, 'account_id1' => $account_id1])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -7,7 +7,7 @@ use yii\helpers\Html;
 
 $this->title = 'Update Tweet: ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Tweets', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id, 'account_id1' => $model->account_id1]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="tweet-update">

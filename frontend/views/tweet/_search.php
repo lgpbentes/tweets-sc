@@ -19,9 +19,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'content') ?>
 
-    <?= $form->field($model, 'qtTrue') ?>
-
-    <?= $form->field($model, 'qtFalse') ?>
+    <?= $form->field($model, 'account_id1') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

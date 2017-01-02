@@ -9,11 +9,9 @@ use Yii;
  *
  * @property integer $id
  * @property string $content
- * @property integer $qtTrue
- * @property integer $qtFalse
+ * @property integer $account_id1
  *
- * @property UserEvTweet[] $userEvTweets
- * @property User[] $users
+ * @property Account $accountId1
  */
 class Tweet extends \yii\db\ActiveRecord
 {
@@ -31,9 +29,10 @@ class Tweet extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['content'], 'required'],
+            [['content', 'account_id1'], 'required'],
             [['content'], 'string'],
-            [['qtTrue', 'qtFalse'], 'integer'],
+            [['account_id1'], 'integer'],
+            [['account_id1'], 'exist', 'skipOnError' => true, 'targetClass' => Account::className(), 'targetAttribute' => ['account_id1' => 'id']],
         ];
     }
 
@@ -45,24 +44,15 @@ class Tweet extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'content' => 'Content',
-            'qtTrue' => 'Qt True',
-            'qtFalse' => 'Qt False',
+            'account_id1' => 'Account Id1',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUserEvTweets()
+    public function getAccountId1()
     {
-        return $this->hasMany(UserEvTweet::className(), ['tweet_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUsers()
-    {
-        return $this->hasMany(User::className(), ['id' => 'user_id'])->viaTable('user_ev_tweet', ['tweet_id' => 'id']);
+        return $this->hasOne(Account::className(), ['id' => 'account_id1']);
     }
 }
