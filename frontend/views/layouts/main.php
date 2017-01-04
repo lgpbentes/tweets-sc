@@ -36,8 +36,8 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'Tweets', 'url' => ['/tweet/index'], 'visible' => !(Yii::$app->user->isGuest)],
         ['label' => 'Accounts', 'url' => ['/account/index'], 'visible' => !(Yii::$app->user->isGuest)],
+        ['label' => 'Ranking', 'url' => ['/account/ranking'], 'visible' => !(Yii::$app->user->isGuest)],
 
     ];
     if (Yii::$app->user->isGuest) {
@@ -71,9 +71,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <p class="pull-left">&copy; IComp - Ufam <?= date('Y') ?></p>
     </div>
 </footer>
 

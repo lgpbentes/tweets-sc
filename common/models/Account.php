@@ -11,6 +11,7 @@ use Yii;
  * @property string $username
  * @property string $bio
  * @property string $photo_profile
+ * @property string $user_json
  *
  * @property Tweet[] $tweets
  * @property UserEvAccount[] $userEvAccounts
@@ -32,6 +33,8 @@ class Account extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['user_json'], 'required'],
+            [['user_json'], 'string'],
             [['username'], 'string', 'max' => 45],
             [['bio', 'photo_profile'], 'string', 'max' => 255],
         ];
@@ -47,6 +50,7 @@ class Account extends \yii\db\ActiveRecord
             'username' => 'Username',
             'bio' => 'Bio',
             'photo_profile' => 'Photo Profile',
+            'user_json' => 'User Json',
         ];
     }
 

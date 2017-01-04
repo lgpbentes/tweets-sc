@@ -6,33 +6,143 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\Account */
 
-$this->title = $model->id;
+$this->title = "@".$model->username;
 $this->params['breadcrumbs'][] = ['label' => 'Accounts', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = $model->username;
+$user_json = json_decode($model->user_json);
 ?>
-<div class="account-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<!DOCTYPE html>
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3-theme-blue-grey.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
+</style>
+<body class="w3-theme-l5">
 
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'username',
-            'bio',
-            'photo_profile',
-        ],
-    ]) ?>
+<!-- Page Container -->
+<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
+    <!-- The Grid -->
+    <div class="w3-row">
+        <!-- Left Column -->
+        <div class="w3-col m3">
+            <!-- Profile -->
+            <div class="w3-card-2 w3-round w3-white">
+                <div class="w3-container">
+                    <h4 class="w3-center"><?="@".$model->username?></h4>
+                    <p class="w3-center"> <img src="<?=$model->photo_profile?>"avatar3.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
+                    <p class="w3-center">
+                    <div class="w3-half">
+                        <button class="w3-btn w3-green w3-btn-block w3-section" title="É um BOT"><i class="fa fa-check"></i></button>
+                    </div>
+                    <div class="w3-half">
+                        <button class="w3-btn w3-red w3-btn-block w3-section" title="Não é um BOT"><i class="fa fa-remove"></i></button>
+                    </div>
+                    <hr>
+                    <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i><?= $model->bio?></p>
+                    <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> <?=$user_json->location?></p>
+                    <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> Created at <?=date_format(date_create($user_json->created_at), 'Y-m-d')?></p>
+                </div>
+            </div>
+            <br>
+            <!-- Alert Box -->
+            <div class="w3-container w3-round w3-theme-l4 w3-border w3-theme-border w3-margin-bottom w3-hide-small">
+        <span onclick="this.parentElement.style.display='none'" class="w3-hover-text-grey w3-closebtn">
+          <i class="fa fa-remove"></i>
+        </span>
+                <p><strong>Hey!</strong></p>
+                <p>Analise e Descubra se essa conta é um bot!</p>
+            </div>
+            <!-- Accordion -->
+            <div class="w3-card-2 w3-round">
+                <div class="w3-accordion w3-white">
+                    <button class="w3-btn-block w3-theme-l1 w3-left-align"><i class="fa fa-pencil fa-fw w3-margin-right"></i> <?=$user_json->statuses_count?> tweets</button>
 
+                    <button class="w3-btn-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i>Following <?=$user_json->friends_count?></button>
+
+                    <button class="w3-btn-block w3-theme-l1 w3-left-align"><i class="fa fa-users fa-fw w3-margin-right"></i> <?=$user_json->followers_count?> followers</button>
+
+                </div>
+            </div>
+            <br>
+
+            <br>
+
+            <!-- End Left Column -->
+        </div>
+
+        <!-- Middle Column -->
+        <div class="w3-col m7">
+
+            <?php
+            $tweets = $model->getTweets()->all();
+
+            foreach($tweets as $tweet){
+                $tweet = json_decode($tweet->content);
+            ?>
+                <div class="w3-container w3-card-2 w3-white w3-round w3-margin"><br>
+                    <img src="<?=$model->photo_profile?>" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px; height: 60px">
+                    <span class="w3-right w3-opacity"><?=date_format(date_create($tweet->created_at), 'Y-m-d H:i')?></span>
+                    <h4><?="@".$model->username?></h4><br>
+                    <hr class="w3-clear">
+                    <p><?=$tweet->text?></p>
+                </div>
+            <?php
+            }
+            ?>
+            <!-- End Middle Column -->
+        </div>
+
+        <!-- Right Column -->
+        <div class="w3-col m2">
+            <br>
+
+            <div class="w3-card-2 w3-round w3-white w3-padding-32 w3-center">
+                <p><i class="fa fa-bug w3-xxlarge"></i></p>
+            </div>
+
+            <!-- End Right Column -->
+        </div>
+
+        <!-- End Grid -->
+    </div>
+
+    <!-- End Page Container -->
 </div>
+<br>
+
+
+<script>
+    // Accordion
+    function myFunction(id) {
+        var x = document.getElementById(id);
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+            x.previousElementSibling.className += " w3-theme-d1";
+        } else {
+            x.className = x.className.replace("w3-show", "");
+            x.previousElementSibling.className =
+                x.previousElementSibling.className.replace(" w3-theme-d1", "");
+        }
+    }
+
+    // Used to toggle the menu on smaller screens when clicking on the menu button
+    function openNav() {
+        var x = document.getElementById("navDemo");
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+        } else {
+            x.className = x.className.replace(" w3-show", "");
+        }
+    }
+</script>
+
+</body>
+</html>

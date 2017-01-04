@@ -74,6 +74,11 @@ class AccountController extends Controller
         }
     }
 
+    public function actionRanking()
+    {
+        return $this->render('ranking');
+    }
+
     /**
      * Updates an existing Account model.
      * If update is successful, the browser will be redirected to the 'view' page.
