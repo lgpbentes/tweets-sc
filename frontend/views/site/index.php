@@ -146,7 +146,6 @@ and is wrapped around the whole page content, except for the footer in this exam
                 </div>
                 <div class="w3-container w3-white">
                     <h6><button onclick="window.location.href='index.php?r=account%2Findex'" class="w3-btn w3-white w3-padding-large w3-large w3-opacity w3-hover-opacity-off">Start</button></h6>
-
                 </div>
 
 

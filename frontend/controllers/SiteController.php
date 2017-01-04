@@ -141,6 +141,11 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
+    public function actionTeste()
+    {
+        return $this->render('twitter_api');
+    }
+
     /**
      * Signs user up.
      *

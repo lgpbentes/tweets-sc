@@ -1,7 +1,11 @@
 <?php
 
+
 namespace frontend\controllers;
 
+require_once ("TwitterAPIExchange.php");
+
+use common\models\Tweet;
 use Yii;
 use common\models\Account;
 use common\models\AccountSearch;
@@ -72,6 +76,44 @@ class AccountController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+
+    public function actionRetrieve($screen_name, $count, $account_id)
+    {
+        $settings = array(
+            'oauth_access_token' => "801954703278010368-PhU1HwLkLKnUbcdVcaq34C94kU6Z0mF",
+            'oauth_access_token_secret' => "xV3JypJzPJdERpDqd7USSqY0RrXVmTLx7eoHBBJ6UfemY",
+            'consumer_key' => "jorvwR9VNPHLsyRoDsV3nYIVb",
+            'consumer_secret' => "a8S4is8RWI0RY8DZBZ4Y3vVmhGWcgwglL1NmljE79InhMCZZy2"
+        );
+
+        $url = "https://api.twitter.com/1.1/statuses/user_timeline.json";
+
+        $requestMethod = "GET";
+
+        $getfield = "?screen_name=".$screen_name."&count=".$count;
+
+        $twitter = new TwitterAPIExchange($settings);
+        $tweets = json_decode($twitter->setGetfield($getfield)
+            ->buildOauth($url, $requestMethod)
+            ->performRequest(), $assoc = TRUE);
+
+        foreach ($tweets as $tw){
+            $content = json_encode($tw);
+
+            $novo = new Tweet();
+            $novo->account_id1 = $account_id;
+            $novo->content=$content;
+            $novo->save();
+
+            echo "</br>";
+            echo "</br>";
+        }
+
+        return $this->render('view', [
+            'model' => $this->findModel($account_id),
+        ]);
+
     }
 
     public function actionRanking()

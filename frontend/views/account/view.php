@@ -14,7 +14,6 @@ $user_json = json_decode($model->user_json);
 
 <!DOCTYPE html>
 <html>
-<title>W3.CSS Template</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
@@ -37,7 +36,7 @@ $user_json = json_decode($model->user_json);
             <div class="w3-card-2 w3-round w3-white">
                 <div class="w3-container">
                     <h4 class="w3-center"><?="@".$model->username?></h4>
-                    <p class="w3-center"> <img src="<?=$model->photo_profile?>"avatar3.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
+                    <p class="w3-center"> <img src="<?=$model->photo_profile?>" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
                     <p class="w3-center">
                     <div class="w3-half">
                         <button class="w3-btn w3-green w3-btn-block w3-section" title="É um BOT"><i class="fa fa-check"></i></button>
@@ -73,6 +72,12 @@ $user_json = json_decode($model->user_json);
             </div>
             <br>
 
+            <div class="w3-card-2 w3-round">
+                <div class="w3-accordion w3-white">
+                    <button class="w3-btn-block  w3-left-align"><i class="fa fa-download fa-fw w3-margin-right"></i><a href="index.php?r=account/retrieve&screen_name=g1&count=5&account_id=1">Recuperar tweets</a></button>
+
+                </div>
+            </div>
             <br>
 
             <!-- End Left Column -->
@@ -116,33 +121,6 @@ $user_json = json_decode($model->user_json);
 
     <!-- End Page Container -->
 </div>
-<br>
-
-
-<script>
-    // Accordion
-    function myFunction(id) {
-        var x = document.getElementById(id);
-        if (x.className.indexOf("w3-show") == -1) {
-            x.className += " w3-show";
-            x.previousElementSibling.className += " w3-theme-d1";
-        } else {
-            x.className = x.className.replace("w3-show", "");
-            x.previousElementSibling.className =
-                x.previousElementSibling.className.replace(" w3-theme-d1", "");
-        }
-    }
-
-    // Used to toggle the menu on smaller screens when clicking on the menu button
-    function openNav() {
-        var x = document.getElementById("navDemo");
-        if (x.className.indexOf("w3-show") == -1) {
-            x.className += " w3-show";
-        } else {
-            x.className = x.className.replace(" w3-show", "");
-        }
-    }
-</script>
 
 </body>
 </html>
