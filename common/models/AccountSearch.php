@@ -19,7 +19,7 @@ class AccountSearch extends Account
     {
         return [
             [['id'], 'integer'],
-            [['username', 'bio', 'photo_profile'], 'safe'],
+            [['username', 'user_json'], 'safe'],
         ];
     }
 
@@ -63,8 +63,7 @@ class AccountSearch extends Account
         ]);
 
         $query->andFilterWhere(['like', 'username', $this->username])
-            ->andFilterWhere(['like', 'bio', $this->bio])
-            ->andFilterWhere(['like', 'photo_profile', $this->photo_profile]);
+            ->andFilterWhere(['like', 'user_json', $this->user_json]);
 
         return $dataProvider;
     }

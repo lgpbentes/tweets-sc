@@ -19,9 +19,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'username') ?>
 
-    <?= $form->field($model, 'bio') ?>
-
-    <?= $form->field($model, 'photo_profile') ?>
+    <?= $form->field($model, 'user_json') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

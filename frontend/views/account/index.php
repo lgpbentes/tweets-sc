@@ -43,8 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'filterModel' => $searchModel,
 
             'columns' => [
-                [
-
+                /*[
                     'attribute' => 'img',
                     'format' => 'html',
                     'label' => 'Profile photo',
@@ -53,10 +52,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             ['width' => '60px']);
                     },
 
-                ],
+                ],*/
                 
                 'username',
-                'bio',
+
 
                 ['class' => 'yii\grid\ActionColumn'],
             ],

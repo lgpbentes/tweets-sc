@@ -9,7 +9,9 @@ use yii\widgets\DetailView;
 $this->title = "@".$model->username;
 $this->params['breadcrumbs'][] = ['label' => 'Accounts', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $model->username;
+//print_r($model->user_json);
 $user_json = json_decode($model->user_json);
+
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +38,7 @@ $user_json = json_decode($model->user_json);
             <div class="w3-card-2 w3-round w3-white">
                 <div class="w3-container">
                     <h4 class="w3-center"><?="@".$model->username?></h4>
-                    <p class="w3-center"> <img src="<?=$model->photo_profile?>" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
+                    <p class="w3-center"> <img src="<?=$user_json->profile_image_url?>" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
                     <p class="w3-center">
                     <div class="w3-half">
                         <button class="w3-btn w3-green w3-btn-block w3-section" title="É um BOT"><i class="fa fa-check"></i></button>
@@ -45,7 +47,7 @@ $user_json = json_decode($model->user_json);
                         <button class="w3-btn w3-red w3-btn-block w3-section" title="Não é um BOT"><i class="fa fa-remove"></i></button>
                     </div>
                     <hr>
-                    <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i><?= $model->bio?></p>
+                    <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i><?= $user_json->description?></p>
                     <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> <?=$user_json->location?></p>
                     <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> Created at <?=date_format(date_create($user_json->created_at), 'Y-m-d')?></p>
                 </div>
@@ -62,7 +64,7 @@ $user_json = json_decode($model->user_json);
             <!-- Accordion -->
             <div class="w3-card-2 w3-round">
                 <div class="w3-accordion w3-white">
-                    <button class="w3-btn-block w3-theme-l1 w3-left-align"><i class="fa fa-pencil fa-fw w3-margin-right"></i> <?=$user_json->statuses_count?> tweets</button>
+                    <button class="w3-btn-block w3-theme-l1 w3-left-align"><i class="fa fa-pencil fa-fw w3-margin-right"></i><?=$user_json->statuses_count?> tweets</button>
 
                     <button class="w3-btn-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i>Following <?=$user_json->friends_count?></button>
 
@@ -74,7 +76,7 @@ $user_json = json_decode($model->user_json);
 
             <div class="w3-card-2 w3-round">
                 <div class="w3-accordion w3-white">
-                    <button class="w3-btn-block  w3-left-align"><i class="fa fa-download fa-fw w3-margin-right"></i><a href="index.php?r=account/retrieve&screen_name=g1&count=5&account_id=1">Recuperar tweets</a></button>
+                    <button class="w3-btn-block  w3-left-align"><i class="fa fa-download fa-fw w3-margin-right"></i><a href="index.php?r=account/retrieve&screen_name=<?=$user_json->screen_name?>&count=5&account_id=<?=$model->id?>">Recuperar tweets</a></button>
 
                 </div>
             </div>
@@ -93,7 +95,7 @@ $user_json = json_decode($model->user_json);
                 $tweet = json_decode($tweet->content);
             ?>
                 <div class="w3-container w3-card-2 w3-white w3-round w3-margin"><br>
-                    <img src="<?=$model->photo_profile?>" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px; height: 60px">
+                    <img src="<?=$user_json->profile_image_url?>" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px; height: 60px">
                     <span class="w3-right w3-opacity"><?=date_format(date_create($tweet->created_at), 'Y-m-d H:i')?></span>
                     <h4><?="@".$model->username?></h4><br>
                     <hr class="w3-clear">
@@ -105,16 +107,6 @@ $user_json = json_decode($model->user_json);
             <!-- End Middle Column -->
         </div>
 
-        <!-- Right Column -->
-        <div class="w3-col m2">
-            <br>
-
-            <div class="w3-card-2 w3-round w3-white w3-padding-32 w3-center">
-                <p><i class="fa fa-bug w3-xxlarge"></i></p>
-            </div>
-
-            <!-- End Right Column -->
-        </div>
 
         <!-- End Grid -->
     </div>

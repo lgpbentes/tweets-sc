@@ -69,8 +69,28 @@ class AccountController extends Controller
     {
         $model = new Account();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $settings = array(
+                'oauth_access_token' => "801954703278010368-PhU1HwLkLKnUbcdVcaq34C94kU6Z0mF",
+                'oauth_access_token_secret' => "xV3JypJzPJdERpDqd7USSqY0RrXVmTLx7eoHBBJ6UfemY",
+                'consumer_key' => "jorvwR9VNPHLsyRoDsV3nYIVb",
+                'consumer_secret' => "a8S4is8RWI0RY8DZBZ4Y3vVmhGWcgwglL1NmljE79InhMCZZy2"
+            );
+
+            $url = "https://api.twitter.com/1.1/users/show.json";
+
+            $requestMethod = "GET";
+            $getfield = "?screen_name=$model->username";
+
+            $twitter = new TwitterAPIExchange($settings);
+            $user = $twitter->setGetfield($getfield)
+                ->buildOauth($url, $requestMethod)
+                ->performRequest();
+            $model->id = json_decode($user)->id;
+            $model->user_json = $user;
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
+
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -110,9 +130,7 @@ class AccountController extends Controller
             echo "</br>";
         }
 
-        return $this->render('view', [
-            'model' => $this->findModel($account_id),
-        ]);
+        return $this->redirect(['view', 'id' => $account_id]);
 
     }
 
