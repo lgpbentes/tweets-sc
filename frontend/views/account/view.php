@@ -9,9 +9,7 @@ use yii\widgets\DetailView;
 $this->title = "@".$model->username;
 $this->params['breadcrumbs'][] = ['label' => 'Accounts', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $model->username;
-//print_r($model->user_json);
 $user_json = json_decode($model->user_json);
-
 ?>
 
 <!DOCTYPE html>
@@ -76,7 +74,7 @@ $user_json = json_decode($model->user_json);
 
             <div class="w3-card-2 w3-round">
                 <div class="w3-accordion w3-white">
-                    <button class="w3-btn-block  w3-left-align"><i class="fa fa-download fa-fw w3-margin-right"></i><a href="index.php?r=account/retrieve&screen_name=<?=$user_json->screen_name?>&count=5&account_id=<?=$model->id?>">Recuperar tweets</a></button>
+                    <button class="w3-btn-block  w3-left-align"><i class="fa fa-download fa-fw w3-margin-right"></i><a href="index.php?r=account/retrieve&screen_name=<?=$model->username?>&count=5&account_id=<?=$model->id?>">Recuperar tweets</a></button>
 
                 </div>
             </div>
@@ -106,7 +104,6 @@ $user_json = json_decode($model->user_json);
             ?>
             <!-- End Middle Column -->
         </div>
-
 
         <!-- End Grid -->
     </div>

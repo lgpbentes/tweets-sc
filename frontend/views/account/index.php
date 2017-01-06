@@ -43,19 +43,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'filterModel' => $searchModel,
 
             'columns' => [
-                /*[
-                    'attribute' => 'img',
-                    'format' => 'html',
-                    'label' => 'Profile photo',
-                    'value' => function ($data) {
-                        return Html::img($data['photo_profile'],
-                            ['width' => '60px']);
-                    },
-
-                ],*/
                 
                 'username',
-
 
                 ['class' => 'yii\grid\ActionColumn'],
             ],
