@@ -6,9 +6,11 @@ namespace frontend\controllers;
 require_once ("TwitterAPIExchange.php");
 
 use common\models\Tweet;
+use common\models\UserEvAccount;
 use Yii;
 use common\models\Account;
 use common\models\AccountSearch;
+use yii\base\Exception;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -55,48 +57,19 @@ class AccountController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
+        $idUser = Yii::$app->user->identity->getId();
+        $consulta = UserEvAccount::find()->where(['user_id'=>$idUser, 'account_id'=>$id])->one();
+
+        if($consulta){
+            $avaliacao = $consulta->bot;
+        } else{
+            $avaliacao = 0;
+        }
+
+        return $this->render('view', ['avaliacao'=>$avaliacao,
             'model' => $this->findModel($id),
         ]);
     }
-
-    /**
-     * Creates a new Account model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    /*public function actionCreate()
-    {
-        $model = new Account();
-
-        if ($model->load(Yii::$app->request->post())) {
-            $settings = array(
-                'oauth_access_token' => "801954703278010368-PhU1HwLkLKnUbcdVcaq34C94kU6Z0mF",
-                'oauth_access_token_secret' => "xV3JypJzPJdERpDqd7USSqY0RrXVmTLx7eoHBBJ6UfemY",
-                'consumer_key' => "jorvwR9VNPHLsyRoDsV3nYIVb",
-                'consumer_secret' => "a8S4is8RWI0RY8DZBZ4Y3vVmhGWcgwglL1NmljE79InhMCZZy2"
-            );
-
-            $url = "https://api.twitter.com/1.1/users/show.json";
-
-            $requestMethod = "GET";
-            $getfield = "?screen_name=$model->username";
-
-            $twitter = new TwitterAPIExchange($settings);
-            $user = $twitter->setGetfield($getfield)
-                ->buildOauth($url, $requestMethod)
-                ->performRequest();
-            $model->id = json_decode($user)->id;
-            $model->user_json = $user;
-            $model->save();
-            return $this->redirect(['view', 'id' => $model->id]);
-
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
-    }*/
 
     public function actionCreate()
     {
@@ -143,19 +116,60 @@ class AccountController extends Controller
         $twitter = new TwitterAPIExchange($settings);
         $tweets = json_decode($twitter->setGetfield($getfield)
             ->buildOauth($url, $requestMethod)
-            ->performRequest(), $assoc = TRUE);
+            ->performRequest());
 
+        //print_r($tweets);
         foreach ($tweets as $tw){
             $content = json_encode($tw);
 
             $novo = new Tweet();
+            $novo->id = $tw->id;
             $novo->account_id1 = $account_id;
             $novo->content=$content;
-            $novo->save();
+
+            echo $novo->id;
+            echo " ". $novo->account_id1;
+            echo "</br>";
+
+            try{
+                $novo->save();
+            } catch (Exception $e) {
+                echo $novo->id;
+            }
+        }
+        return $this->redirect(['view', 'id' => $account_id]);
+    }
+
+    public function actionVerdadeiro($id){
+
+        $idUser = Yii::$app->user->identity->getId();
+
+        $sql = "INSERT INTO user_ev_account (user_id, account_id, bot) VALUES ($idUser, $id, '2')";
+        $connection = Yii::$app->getDb();
+
+        try{
+            // insere na tabela user_ev_tweet
+            $connection->createCommand($sql)->execute();
+
+        }catch (Exception $e){
+            return "Algo deu errado";
         }
 
-        return $this->redirect(['view', 'id' => $account_id]);
+    }
 
+    public function actionFalso($id){
+        $idUser = Yii::$app->user->identity->getId();
+
+        $sql = "INSERT INTO user_ev_account (user_id, account_id, bot) VALUES ($idUser, $id, '1')";
+        $connection = Yii::$app->getDb();
+
+        try{
+            // insere na tabela user_ev_tweet
+            $connection->createCommand($sql)->execute();
+
+        }catch (Exception $e){
+            return "Algo deu errado";
+        }
     }
 
     public function actionRanking()

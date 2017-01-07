@@ -38,12 +38,24 @@ $user_json = json_decode($model->user_json);
                     <h4 class="w3-center"><?="@".$model->username?></h4>
                     <p class="w3-center"> <img src="<?=$user_json->profile_image_url?>" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
                     <p class="w3-center">
-                    <div class="w3-half">
-                        <button class="w3-btn w3-green w3-btn-block w3-section" title="É um BOT"><i class="fa fa-check"></i></button>
-                    </div>
-                    <div class="w3-half">
-                        <button class="w3-btn w3-red w3-btn-block w3-section" title="Não é um BOT"><i class="fa fa-remove"></i></button>
-                    </div>
+                    <?php
+                        if ($avaliacao == 1){
+                            echo "<p>Você avaliou essa conta como Não bot</p>";
+                        } else if($avaliacao == 2){
+                            echo "<p>Você avaliou essa conta como Bot</p>";
+                        } else{
+                    ?>
+                        <div id="av">
+                            <div class="w3-half">
+                                <button onclick="verdadeiro(<?=$model->id?>)" class="w3-btn w3-green w3-btn-block w3-section" title="É um BOT"><i class="fa fa-check"></i></button>
+                            </div>
+                            <div class="w3-half">
+                                <button onclick="falso(<?=$model->id?>)" class="w3-btn w3-red w3-btn-block w3-section" title="Não é um BOT"><i class="fa fa-remove"></i></button>
+                            </div>
+                        </div>
+                    <?php
+                        }
+                    ?>
                     <hr>
                     <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i><?= $user_json->description?></p>
                     <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> <?=$user_json->location?></p>
@@ -74,7 +86,7 @@ $user_json = json_decode($model->user_json);
 
             <div class="w3-card-2 w3-round">
                 <div class="w3-accordion w3-white">
-                    <button class="w3-btn-block  w3-left-align"><i class="fa fa-download fa-fw w3-margin-right"></i><a href="index.php?r=account/retrieve&screen_name=<?=$model->username?>&count=5&account_id=<?=$model->id?>">Recuperar tweets</a></button>
+                    <button class="w3-btn-block  w3-left-align"><i class="fa fa-download fa-fw w3-margin-right"></i><a href="index.php?r=account/retrieve&screen_name=<?=$model->username?>&count=30&account_id=<?=$model->id?>">Recuperar tweets</a></button>
 
                 </div>
             </div>
@@ -98,6 +110,16 @@ $user_json = json_decode($model->user_json);
                     <h4><?="@".$model->username?></h4><br>
                     <hr class="w3-clear">
                     <p><?=$tweet->text?></p>
+                    <?php
+                        try{
+                            echo "<img class='img-responsive' src='".$tweet->entities->media[0]->media_url."'>";
+
+
+                        }catch(Exception $e){
+
+                        }
+
+                    ?>
                 </div>
             <?php
             }
@@ -112,4 +134,20 @@ $user_json = json_decode($model->user_json);
 </div>
 
 </body>
+
+<script>
+    function verdadeiro(id) {
+        $.get('index.php?r=account/verdadeiro&id='+id, function (dados) {
+            console.log(dados);
+            document.getElementById("av").style.visibility = "hidden";        });
+    }
+
+    function falso(id) {
+        $.get('index.php?r=account/falso&id='+id, function (dados) {
+            console.log(dados);
+            document.getElementById("av").style.visibility = "hidden";
+        });
+    }
+
+</script>
 </html>

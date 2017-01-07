@@ -31,6 +31,7 @@ class Account extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['username'], 'required'],
             [['user_json'], 'string'],
             [['username'], 'string', 'max' => 45],
         ];
