@@ -99,22 +99,20 @@ $user_json = json_decode($model->user_json);
         <div class="w3-col m7">
 
             <?php
-            $tweets = $model->getTweets()->all();
+            $tweets = $model->getTweets()->orderBy(["datatt"=> SORT_DESC])->all();
 
             foreach($tweets as $tweet){
                 $tweet = json_decode($tweet->content);
             ?>
                 <div class="w3-container w3-card-2 w3-white w3-round w3-margin"><br>
                     <img src="<?=$user_json->profile_image_url?>" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px; height: 60px">
-                    <span class="w3-right w3-opacity"><?=date_format(date_create($tweet->created_at), 'Y-m-d H:i')?></span>
+                    <span class="w3-right w3-opacity"><?=date_format(date_create($tweet->created_at), 'Y-m-d H:i:s')?></span>
                     <h4><?="@".$model->username?></h4><br>
                     <hr class="w3-clear">
                     <p><?=$tweet->text?></p>
                     <?php
                         try{
                             echo "<img class='img-responsive' src='".$tweet->entities->media[0]->media_url."'>";
-
-
                         }catch(Exception $e){
 
                         }

@@ -126,7 +126,7 @@ class AccountController extends Controller
             $novo->id = $tw->id;
             $novo->account_id1 = $account_id;
             $novo->content=$content;
-
+            $novo->datatt = date_format(date_create($tw->created_at), 'Y-m-d H:i:s');
             echo $novo->id;
             echo " ". $novo->account_id1;
             echo "</br>";
