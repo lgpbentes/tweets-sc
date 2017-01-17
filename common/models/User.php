@@ -12,6 +12,7 @@ use yii\web\IdentityInterface;
  *
  * @property integer $id
  * @property string $username
+ * @property integer $pontuacao
  * @property string $password_hash
  * @property string $password_reset_token
  * @property string $email
@@ -116,6 +117,11 @@ class User extends ActiveRecord implements IdentityInterface
         $timestamp = (int) substr($token, strrpos($token, '_') + 1);
         $expire = Yii::$app->params['user.passwordResetTokenExpire'];
         return $timestamp + $expire >= time();
+    }
+
+    public function getPontuacao()
+    {
+        return $this->pontuacao;
     }
 
     /**

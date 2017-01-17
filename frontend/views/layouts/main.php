@@ -45,9 +45,18 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
         $menuItems[] = '<li>'
+            . Html::beginForm(['/account/history'], 'post')
+            . Html::submitButton(
+                Yii::$app->user->identity->username .' (' . Yii::$app->user->identity->pontuacao . ' pontos)',
+                ['class' => 'btn btn-link']
+            )
+            . Html::endForm()
+            . '</li>';
+
+        $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
+                'Logout',
                 ['class' => 'btn btn-link']
             )
             . Html::endForm()

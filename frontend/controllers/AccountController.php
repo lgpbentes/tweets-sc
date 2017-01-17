@@ -141,6 +141,7 @@ class AccountController extends Controller
     }
 
     public function actionVerdadeiro($id){
+        $pontuacao = Yii::$app->user->identity->pontuacao +10;
 
         $idUser = Yii::$app->user->identity->getId();
 
@@ -151,13 +152,24 @@ class AccountController extends Controller
             // insere na tabela user_ev_tweet
             $connection->createCommand($sql)->execute();
 
+            $sql = "UPDATE  user SET  pontuacao = $pontuacao WHERE  id=$idUser";
+
+            $connection->createCommand($sql)->execute();
+
         }catch (Exception $e){
             return "Algo deu errado";
         }
 
     }
 
+    public function actionHistory()
+    {
+        return $this->render('history');
+    }
+
     public function actionFalso($id){
+        $pontuacao = Yii::$app->user->identity->pontuacao +10;
+
         $idUser = Yii::$app->user->identity->getId();
 
         $sql = "INSERT INTO user_ev_account (user_id, account_id, bot) VALUES ($idUser, $id, '1')";
@@ -165,6 +177,10 @@ class AccountController extends Controller
 
         try{
             // insere na tabela user_ev_tweet
+            $connection->createCommand($sql)->execute();
+
+            $sql = "UPDATE  user SET  pontuacao = $pontuacao WHERE  id=$idUser";
+
             $connection->createCommand($sql)->execute();
 
         }catch (Exception $e){
