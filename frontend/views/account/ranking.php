@@ -32,7 +32,14 @@ $users = User::find()->orderBy(["pontuacao"=> SORT_DESC])->all();
             ?>
                 <li class="w3-padding-16" width="60px;" >
                     <span class="w3-closebtn w3-padding w3-margin-right w3-medium"><?=$user->pontuacao?> pontos</span>
-                    <img src="img/fake.png" class="w3-left w3-circle w3-margin-right" style="width:50px; height: 50px">
+                    <?php
+                    if($user->foto){
+                        echo"<img src='$user->foto' class='w3-left w3-circle w3-margin-right' style='width:50px; height: 50px'>";
+                    } else{
+                        echo"<img src='users/fake.png' class='w3-left w3-circle w3-margin-right' style='width:50px; height: 50px'>";
+                    }
+                    ?>
+
                     <span class="w3-xlarge"><?=$user->username?></span><br>
                 </li>
             <?php

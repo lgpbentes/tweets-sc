@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Máquina: localhost
--- Data de Criação: 16-Jan-2017 às 23:59
+-- Data de Criação: 18-Jan-2017 às 09:06
 -- Versão do servidor: 5.6.31-0ubuntu0.14.04.2
 -- versão do PHP: 5.5.9-1ubuntu4.20
 
@@ -227,6 +227,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) CHARACTER SET utf8 NOT NULL,
   `pontuacao` int(11) NOT NULL DEFAULT '0',
+  `foto` text COLLATE utf8_unicode_ci NOT NULL,
   `auth_key` varchar(32) CHARACTER SET utf8 NOT NULL,
   `password_hash` varchar(255) CHARACTER SET utf8 NOT NULL,
   `password_reset_token` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
@@ -238,19 +239,20 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `password_reset_token` (`password_reset_token`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
 
 --
 -- Extraindo dados da tabela `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `pontuacao`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`) VALUES
-(2, 'admin', 10, 'CPpNIhFOFKQ54-gH_N3OJJ3EzWcMgvy9', '$2y$13$VATCGgEa1/etkcdj8eHO3uFIQYeb25zl.zReKgxfBhmaIVJHhq1.y', NULL, 'admin@gmail.com', 10, 1483300105, 1483300105),
-(3, 'usuario1', 0, 'lkRFcBKo8XvSE57jsnLG4oPaWZudt97W', '$2y$13$IX5fT7vDuU59wjX9L7SXcevgWMrTZuyNhnRp9/4ydEUsm6HkeYFj6', NULL, 'usuario1@gmail.com', 10, 1484612367, 1484612367),
-(4, 'usuario2', 30, '0dvP59zwJlxODCai5gBlIL-O_ZU6I1bM', '$2y$13$d32klzIHY4z5sVi7KwgnFOptPXtjrheq7lxncoz7zGh8oZRNeyyTy', NULL, 'usuario2@gmail.com', 10, 1484612408, 1484612408),
-(5, 'usuario3', 0, '1m1vXyQIlJ7-7Ls7mFc4GXBkt2sHhMTM', '$2y$13$IwdiZvKM7ATwORcggQCBs.KGHMxr9M6JVWOTfIvDU3XaxGgnWiBWy', NULL, 'usuario3@gmail.com', 10, 1484612470, 1484612470),
-(6, 'usuario4', 0, 'EaUAgg71GT1PRO6dKMGyydhBIqiirwdF', '$2y$13$0Nr.A6OJyYZD/FNzc3PK6O/MUWYCr4VQKgjdCO7i9PzsYuO2XY8lu', NULL, 'usuario4@gmail.com', 10, 1484612488, 1484612488),
-(7, 'usuario5', 30, '_c0ZPgwr3gXcRPEwiC6AaulUmL0abg5N', '$2y$13$wjrLXF2uR6Vth2dyp2DncOgRpgqDcxcALa0DKwT4L8yvjIaMddST6', NULL, 'usuario5@gmail.com', 10, 1484612527, 1484612527);
+INSERT INTO `user` (`id`, `username`, `pontuacao`, `foto`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`) VALUES
+(2, 'admin', 10, '', 'CPpNIhFOFKQ54-gH_N3OJJ3EzWcMgvy9', '$2y$13$VATCGgEa1/etkcdj8eHO3uFIQYeb25zl.zReKgxfBhmaIVJHhq1.y', NULL, 'admin@gmail.com', 10, 1483300105, 1483300105),
+(3, 'usuario1', 0, '', 'lkRFcBKo8XvSE57jsnLG4oPaWZudt97W', '$2y$13$IX5fT7vDuU59wjX9L7SXcevgWMrTZuyNhnRp9/4ydEUsm6HkeYFj6', NULL, 'usuario1@gmail.com', 10, 1484612367, 1484612367),
+(4, 'usuario2', 30, '', '0dvP59zwJlxODCai5gBlIL-O_ZU6I1bM', '$2y$13$d32klzIHY4z5sVi7KwgnFOptPXtjrheq7lxncoz7zGh8oZRNeyyTy', NULL, 'usuario2@gmail.com', 10, 1484612408, 1484612408),
+(5, 'usuario3', 0, '', '1m1vXyQIlJ7-7Ls7mFc4GXBkt2sHhMTM', '$2y$13$IwdiZvKM7ATwORcggQCBs.KGHMxr9M6JVWOTfIvDU3XaxGgnWiBWy', NULL, 'usuario3@gmail.com', 10, 1484612470, 1484612470),
+(6, 'usuario4', 0, '', 'EaUAgg71GT1PRO6dKMGyydhBIqiirwdF', '$2y$13$0Nr.A6OJyYZD/FNzc3PK6O/MUWYCr4VQKgjdCO7i9PzsYuO2XY8lu', NULL, 'usuario4@gmail.com', 10, 1484612488, 1484612488),
+(7, 'usuario5', 30, '', '_c0ZPgwr3gXcRPEwiC6AaulUmL0abg5N', '$2y$13$wjrLXF2uR6Vth2dyp2DncOgRpgqDcxcALa0DKwT4L8yvjIaMddST6', NULL, 'usuario5@gmail.com', 10, 1484612527, 1484612527),
+(8, 'Larissa', 10, 'users/user_Larissa.png', 'q_EWPBiSo6Nh1-wBXToVecZ-gfyOkLRv', '$2y$13$aR3FDApADWWBEzPpiFASX.VFT5VRvKy9TErCAeaDB3.VNMPgOpqBm', NULL, 'larissa@gmail.com', 10, 1484680832, 1484680832);
 
 -- --------------------------------------------------------
 
@@ -279,7 +281,8 @@ INSERT INTO `user_ev_account` (`user_id`, `account_id`, `bot`) VALUES
 (4, 31239415, '2'),
 (7, 31239410, '2'),
 (7, 31239412, '2'),
-(7, 31239413, '1');
+(7, 31239413, '1'),
+(8, 31239411, '1');
 
 --
 -- Constraints for dumped tables

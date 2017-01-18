@@ -3,6 +3,7 @@ namespace frontend\models;
 
 use yii\base\Model;
 use common\models\User;
+use yii\helpers\FileHelper;
 
 /**
  * Signup form
@@ -12,6 +13,7 @@ class SignupForm extends Model
     public $username;
     public $email;
     public $password;
+    public $foto;
 
 
     /**
@@ -30,6 +32,8 @@ class SignupForm extends Model
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
             ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
+
+            [['foto'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
 
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
@@ -50,9 +54,26 @@ class SignupForm extends Model
         $user = new User();
         $user->username = $this->username;
         $user->email = $this->email;
+        $user->foto = $this->foto;
         $user->setPassword($this->password);
         $user->generateAuthKey();
         
         return $user->save() ? $user : null;
     }
+
+    private $nome, $extensao;
+    public function upload()
+    {
+        $nome= "user_".$this->username;
+        $extensao = $this->foto->extension;
+        if ($this->validate()) {
+            $this->foto->saveAs('users/' . $nome . '.' . $extensao);
+            $this->foto="users/".$nome.'.'.$extensao;
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
