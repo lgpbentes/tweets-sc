@@ -145,20 +145,78 @@ class AccountController extends Controller
 
         $idUser = Yii::$app->user->identity->getId();
 
+        $sqlGetId = "SELECT user_id FROM user_ev_account WHERE bot= '2' AND account_id=".$id;
+
+
         $sql = "INSERT INTO user_ev_account (user_id, account_id, bot) VALUES ($idUser, $id, '2')";
         $connection = Yii::$app->getDb();
+        $resultsGetId =$connection ->createCommand($sqlGetId)->queryAll();
+        print_r($resultsGetId);
+        echo "<br>";
+        print_r(count($resultsGetId));
+        //$results = $results->queryAll();
+         foreach ($resultsGetId as $resultGetId) {
+                      print_r($resultGetId['user_id']);
+                    $sqlGetPont = "SELECT pontuacao FROM user WHERE id=".$resultGetId['user_id'];
+                    $resultsGetPont =$connection ->createCommand($sqlGetPont)->queryAll();
+                    print_r($resultsGetPont);
 
-        try{
-            // insere na tabela user_ev_tweet
-            $connection->createCommand($sql)->execute();
+                    foreach ($resultsGetPont as $resultsGetPont) {
+                            $pontuacaoGet = $resultsGetPont['pontuacao'] + 3;
+                            print_r($pontuacaoGet);
+                            try{
 
-            $sql = "UPDATE  user SET  pontuacao = $pontuacao WHERE  id=$idUser";
+                                $sqlUpdatePont = "UPDATE  user SET  pontuacao = $pontuacaoGet WHERE  id=".$resultGetId['user_id'];
+                            $connection->createCommand($sqlUpdatePont)->execute();
 
-            $connection->createCommand($sql)->execute();
+                            }catch (Exception $e){
+                                return "Algo deu errado Dentro for";
+                        }
 
-        }catch (Exception $e){
-            return "Algo deu errado";
+                        
+
+                    }
+
+
+
+                    //print_r(1);
+                     echo '<br>';
+
+
         }
+        if(count($resultsGetId)<=0){
+
+            try{
+            // insere na tabela user_ev_tweet
+
+
+                $connection->createCommand($sql)->execute();
+
+                $sql = "UPDATE  user SET  pontuacao = $pontuacao WHERE  id=$idUser";
+
+                $connection->createCommand($sql)->execute();
+
+            }catch (Exception $e){
+                return "Algo deu errado";
+            }
+        } else{
+            $pontuacao = Yii::$app->user->identity->pontuacao + (count($resultsGetId)*3);
+            try{
+            // insere na tabela user_ev_tweet
+
+
+                $connection->createCommand($sql)->execute();
+
+                $sql = "UPDATE  user SET  pontuacao = $pontuacao WHERE  id=$idUser";
+
+                $connection->createCommand($sql)->execute();
+
+            }catch (Exception $e){
+                return "Algo deu errado";
+            }
+        }
+
+        
 
     }
 
@@ -171,21 +229,75 @@ class AccountController extends Controller
         $pontuacao = Yii::$app->user->identity->pontuacao +10;
 
         $idUser = Yii::$app->user->identity->getId();
+        $sqlGetId = "SELECT user_id FROM user_ev_account WHERE bot= '1' AND account_id=".$id;
+
 
         $sql = "INSERT INTO user_ev_account (user_id, account_id, bot) VALUES ($idUser, $id, '1')";
         $connection = Yii::$app->getDb();
+        $resultsGetId =$connection ->createCommand($sqlGetId)->queryAll();
+        print_r($resultsGetId);
+        echo "<br>";
+        print_r(count($resultsGetId));
+        //$results = $results->queryAll();
+         foreach ($resultsGetId as $resultGetId) {
+                      print_r($resultGetId['user_id']);
+                    $sqlGetPont = "SELECT pontuacao FROM user WHERE id=".$resultGetId['user_id'];
+                    $resultsGetPont =$connection ->createCommand($sqlGetPont)->queryAll();
+                    print_r($resultsGetPont);
 
-        try{
-            // insere na tabela user_ev_tweet
-            $connection->createCommand($sql)->execute();
+                    foreach ($resultsGetPont as $resultsGetPont) {
+                            $pontuacaoGet = $resultsGetPont['pontuacao'] + 3;
+                            print_r($pontuacaoGet);
+                            try{
 
-            $sql = "UPDATE  user SET  pontuacao = $pontuacao WHERE  id=$idUser";
+                                $sqlUpdatePont = "UPDATE  user SET  pontuacao = $pontuacaoGet WHERE  id=".$resultGetId['user_id'];
+                            $connection->createCommand($sqlUpdatePont)->execute();
 
-            $connection->createCommand($sql)->execute();
+                            }catch (Exception $e){
+                                return "Algo deu errado Dentro for";
+                        }
 
-        }catch (Exception $e){
-            return "Algo deu errado";
+                        
+
+                    }
+
+                    //print_r(1);
+                     echo '<br>';
+
+
         }
+        if(count($resultsGetId)<=0){
+
+            try{
+            // insere na tabela user_ev_tweet
+
+
+                $connection->createCommand($sql)->execute();
+
+                $sql = "UPDATE  user SET  pontuacao = $pontuacao WHERE  id=$idUser";
+
+                $connection->createCommand($sql)->execute();
+
+            }catch (Exception $e){
+                return "Algo deu errado";
+            }
+        } else{
+            $pontuacao = Yii::$app->user->identity->pontuacao + (count($resultsGetId)*3);
+            try{
+            // insere na tabela user_ev_tweet
+
+
+                $connection->createCommand($sql)->execute();
+
+                $sql = "UPDATE  user SET  pontuacao = $pontuacao WHERE  id=$idUser";
+
+                $connection->createCommand($sql)->execute();
+
+            }catch (Exception $e){
+                return "Algo deu errado";
+            }
+        }
+
     }
 
     public function actionRanking()
