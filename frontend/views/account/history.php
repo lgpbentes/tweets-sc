@@ -26,7 +26,7 @@ $avaliacoes = UserEvAccount::find()->where(['user_id'=>Yii::$app->user->identity
         $conta = json_decode(Account::findOne(['id'=>$avaliacao->account_id])->user_json);
 
         $nconcordam = UserEvAccount::find()->where(['account_id'=>$avaliacao->account_id])->andWhere(['<>','bot',$avaliacao->bot])->count();
-        $concordam = UserEvAccount::find()->where(['account_id'=>$avaliacao->account_id, 'bot'=>$avaliacao->bot])->count();
+        $concordam = UserEvAccount::find()->where(['account_id'=>$avaliacao->account_id, 'bot'=>$avaliacao->bot])->count() - 1;
 
         ?>
 

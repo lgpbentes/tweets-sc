@@ -100,6 +100,10 @@ class AccountController extends Controller
 
     public function actionRetrieve($screen_name, $count, $account_id)
     {
+        $sql = "DELETE FROM tweet where account_id1 = $account_id";
+        $connection = Yii::$app->getDb();
+        $connection->createCommand($sql)->execute();
+
         $settings = array(
             'oauth_access_token' => "801954703278010368-PhU1HwLkLKnUbcdVcaq34C94kU6Z0mF",
             'oauth_access_token_secret' => "xV3JypJzPJdERpDqd7USSqY0RrXVmTLx7eoHBBJ6UfemY",
@@ -146,7 +150,6 @@ class AccountController extends Controller
         $idUser = Yii::$app->user->identity->getId();
 
         $sqlGetId = "SELECT user_id FROM user_ev_account WHERE bot= '2' AND account_id=".$id;
-
 
         $sql = "INSERT INTO user_ev_account (user_id, account_id, bot) VALUES ($idUser, $id, '2')";
         $connection = Yii::$app->getDb();

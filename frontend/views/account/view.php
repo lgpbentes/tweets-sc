@@ -84,12 +84,18 @@ $user_json = json_decode($model->user_json);
             </div>
             <br>
 
-            <div class="w3-card-2 w3-round">
-                <div class="w3-accordion w3-white">
-                    <button class="w3-btn-block  w3-left-align"><i class="fa fa-download fa-fw w3-margin-right"></i><a href="index.php?r=account/retrieve&screen_name=<?=$model->username?>&count=30&account_id=<?=$model->id?>">Recuperar tweets</a></button>
+            <?php
+                if (Yii::$app->user->identity->username == "admin"){
+                    echo "
+                        <div class=\"w3-card-2 w3-round\">
+                        <div class=\"w3-accordion w3-white\">
+                            <button class=\"w3-btn-block  w3-left-align\"><i class=\"fa fa-download fa-fw w3-margin-right\"></i><a href=\"index.php?r=account/retrieve&screen_name=$model->username&count=30&account_id=$model->id\">Recuperar tweets</a></button>
+                        </div>
+                        </div>
+                    ";
+                }
+            ?>
 
-                </div>
-            </div>
             <br>
 
             <!-- End Left Column -->

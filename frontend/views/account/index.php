@@ -22,7 +22,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="w3-row-padding w3-margin-bottom">
 
         <p>
-            <?= Html::a('Nova Conta', ['create'], ['class' => 'btn btn-success']) ?>
+            <?php
+            if (Yii::$app->user->identity->username == "admin"){
+                echo Html::a('Nova Conta', ['create'], ['class' => 'btn btn-success']);
+            }
+            ?>
+
         </p>
         <?php /*Pjax::begin(); ?>    <?= GridView::widget(
             [
