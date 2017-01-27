@@ -36,12 +36,12 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'Accounts', 'url' => ['/account/index'], 'visible' => !(Yii::$app->user->isGuest)],
+        ['label' => 'Contas', 'url' => ['/account/index'], 'visible' => !(Yii::$app->user->isGuest)],
         ['label' => 'Ranking', 'url' => ['/account/ranking'], 'visible' => !(Yii::$app->user->isGuest)],
 
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
+        $menuItems[] = ['label' => 'Cadastro', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
         $menuItems[] = '<li>'

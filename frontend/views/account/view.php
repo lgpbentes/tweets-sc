@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model common\models\Account */
 
 $this->title = "@".$model->username;
-$this->params['breadcrumbs'][] = ['label' => 'Accounts', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Contas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $model->username;
 $user_json = json_decode($model->user_json);
 ?>
@@ -35,7 +35,7 @@ $user_json = json_decode($model->user_json);
             <!-- Profile -->
             <div class="w3-card-2 w3-round w3-white">
                 <div class="w3-container">
-                    <h4 class="w3-center"><?="@".$model->username?></h4>
+                    <h4 class="w3-center"><?=$user_json->name?></h4>
                     <p class="w3-center"> <img src="<?=$user_json->profile_image_url?>" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
                     <p class="w3-center">
                     <?php

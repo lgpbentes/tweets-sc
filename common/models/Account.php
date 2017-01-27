@@ -10,6 +10,8 @@ use Yii;
  * @property integer $id
  * @property string $username
  * @property string $user_json
+ * @property string $photo_profile
+ * @property string $bio
  *
  * @property Tweet[] $tweets
  * @property UserEvAccount[] $userEvAccounts
