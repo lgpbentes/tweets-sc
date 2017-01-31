@@ -16,8 +16,8 @@ $user_json = json_decode($model->user_json);
 <html>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-<link rel="stylesheet" href="http://www.w3schools.com/lib/w3-theme-blue-grey.css">
+<link rel="stylesheet" href="css/w3.css">
+<link rel="stylesheet" href="css/w3-theme-blue-grey.css">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
@@ -47,10 +47,10 @@ $user_json = json_decode($model->user_json);
                     ?>
                         <div id="av">
                             <div class="w3-half">
-                                <button onclick="verdadeiro(<?=$model->id?>)" class="w3-btn w3-green w3-btn-block w3-section" title="É um BOT"><i class="fa fa-check"></i></button>
+                                <button onclick="verdadeiro(<?=$model->id?>)" class="w3-btn w3-red w3-btn-block w3-section" title="É um BOT"><i class="fa fa-android"></i> É um bot</button>
                             </div>
                             <div class="w3-half">
-                                <button onclick="falso(<?=$model->id?>)" class="w3-btn w3-red w3-btn-block w3-section" title="Não é um BOT"><i class="fa fa-remove"></i></button>
+                                <button onclick="falso(<?=$model->id?>)" class="w3-btn w3-green w3-btn-block w3-section" title="Não é um BOT"><i class="fa fa-user"></i> Não é bot</button>
                             </div>
                         </div>
                     <?php
