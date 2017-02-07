@@ -25,7 +25,7 @@ and is wrapped around the whole page content, except for the footer in this exam
     <!-- Header -->
     <header class="w3-container w3-center w3-padding-48 w3-white">
         <h1 class="w3-xxxlarge"><b>Ferramenta de Avaliação</b></h1>
-        <h6>Welcome to the <span class="w3-tag">Bot's world</span></h6>
+        <h6>Bem-vindo ao <span class="w3-tag">Mundo dos bots</span></h6>
     </header>
 
     <!-- Image header -->
@@ -34,7 +34,7 @@ and is wrapped around the whole page content, except for the footer in this exam
         <div class="w3-display-left w3-padding-xlarge">
 
 
-            <h1 class="w3-jumbo w3-text-white w3-hide-small"><b>5 WAYS TO SPOT A TWITTER BOT</b></h1>
+            <h1 class="w3-jumbo w3-text-white w3-hide-small"><b>5 FORMAS DE DETECTAR UM BOT</b></h1>
 
         </div>
     </header>
@@ -48,24 +48,22 @@ and is wrapped around the whole page content, except for the footer in this exam
             <!-- Blog entry -->
             <div class="w3-container w3-white w3-margin w3-padding-large">
                 <div class="w3-center">
-                    <h3>#1: Crazy Twitter Handles and Photos</h3>
+                    <h3>#1: Foto/Username estranho</h3>
                 </div>
 
                 <div class="w3-justify">
-                    <p><strong></strong> There are many ways to spot a Twitter bot, but the easiest way is to look for the tell-tale make-up of a fake account. This includes a bad photo, either unclear, or not of a person’s face. If there is a face, there is a good chance it will be an attractive man or woman. Plus if the Twitter handle does not match the photo, name or brand – it’s fake..</p>
-
+                    <p><strong></strong> Existem muitas formas de detectar um bot no Twitter, mas a forma mais fácil é olhar para a composição de uma conta falsa. Isso inclui uma foto ruim, não clara ou sem rostos. Se existe um rosto, então há uma boa chance de ser um homem ou mulher atrante. Além disso, se o nome de usuário não bate com a foto, nome ou marca - é uma conta falsa. </p>
                 </div>
             </div>
             <hr>
             <!-- Blog entry -->
             <div class="w3-container w3-white w3-margin w3-padding-large">
                 <div class="w3-center">
-                    <h3>#2: Low Tweets and Suspect URL</h3>
+                    <h3>#2: Poucos tweets e URL's suspeitas</h3>
                 </div>
 
                 <div class="w3-justify">
-                    <p>Most <strong>Twitter bots</strong> are discovered shortly after people follow them, which means that they almost always have a high number of people they follow, but with very few tweets actually published on a daily basis. The URLs are also suspicious and lead to spam sites. I always check the URL of people I follow first, to verify their credibility.</p>
-
+                    <p>A maioria dos <strong>bots do Twitter</strong> são descobertos pouco depois que as pessoas os seguem, o que significa que sempre têm um grande número de pessoas que seguem, mas com muito poucos tweets realmente publicados diariamente. As URLs também são suspeitas e levam a sites de spam. É preciso sempre checar a URL das pessoas que você segue, para verificar a credibilidade da conta</p>
                 </div>
             </div>
             <hr>
@@ -73,25 +71,24 @@ and is wrapped around the whole page content, except for the footer in this exam
             <!-- Blog entry -->
             <div class="w3-container w3-white w3-margin w3-padding-large">
                 <div class="w3-center">
-                    <h3>#3: Incorrect Follower/Following Ratios</h3>
+                    <h3>#3: Proporção estranha de Seguindo/Seguidores</h3>
                 </div>
 
                 <div class="w3-justify">
-                    <p>There are thousands of celebrities and authorities that have enormous accounts, with a ratio that exceeds 10:1. But it’s highly unusual for anyone that is not well known and obviously famous to get these ratios. You can bet that if you come across a weird Twitter friend with a 10:1 ratio – they’re probably a spam bot.</p>
+                    <p>Há milhares de celebridades e autoridades que tem contas gigantes, com uma proporção que excede 10:1. Mas é extremamente incomum para qualquer um que não é famoso alcançar essas proporções. Você pode apostar que se você se deparar com um estranho no Twitter com uma proporção de 10:1 - essa conta é provavelmente um bot spam.</p>
 
-                    <p>It’s always good to check out their account feed first however – you don’t want to turn down the opportunity to connect with an influencer because you assume they aren’t who they claim to be!</p>
-
+                    <p>É sempre bom checar o feed da conta primeiro =) </p>
                 </div>
             </div>
             <hr>
             <!-- Blog entry -->
             <div class="w3-container w3-white w3-margin w3-padding-large">
                 <div class="w3-center">
-                    <h3>#4: Just After Publishing a Tweet </h3>
+                    <h3>#4: Após publicação de um tweet</h3>
                 </div>
 
                 <div class="w3-justify">
-                    <p>If you are followed by someone <strong>seconds after publishing a tweet</strong>, the reply is most likely an automation program that targets certain keywords. Don’t follow it back. I know many marketers that only follow people after they have confirmed their identities via direct message. It takes a while, but it’s worth it.</p>
+                    <p>Você é seguido por alguém <strong>segundos depois de publicar um tweet</strong>, a resposta indica o uso de um programa de automação que busca certas palavras-chave. Não o siga de volta. Pessoas envolvidas com marketing confirmam identidade via mensagem direta.</p>
 
                 </div>
             </div>
@@ -100,11 +97,11 @@ and is wrapped around the whole page content, except for the footer in this exam
             <!-- Blog entry -->
             <div class="w3-container w3-white w3-margin w3-padding-large">
                 <div class="w3-center">
-                    <h3>#5: API’s and Repetition</h3>
+                    <h3>#5: API’s e Repetição</h3>
                 </div>
 
                 <div class="w3-justify">
-                    <p>Finally, if you see that the person’s tweet was published by an API, and it seems suspicious – then it is a bot. Real people mostly publish via desktop or mobile device, not API systems. Take a look at what the person says, if they often repeat themselves then they are almost certainly a bot.</p>
+                    <p>Finalmente, se você observa que o tweet foi publicado por uma API e parece suspeito - então é um bot. Pessoas reais geralmente publicam via desktop ou dispositivos móveis, não sistemas de API. Observe o que a pessoa publica, se ela repete as mesmas coisas frequentemente, deve ser um bot.</p>
 
                 </div>
             </div>
@@ -123,29 +120,12 @@ and is wrapped around the whole page content, except for the footer in this exam
 
             <hr>
 
-            <!-- Tags -->
-            <div class="w3-white w3-margin">
-                <div class="w3-container w3-padding w3-black">
-                    <h4>Tags</h4>
-                </div>
-                <div class="w3-container w3-white">
-                    <p>
-                        <span class="w3-tag w3-black w3-margin-bottom">Fashion</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">New York</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">London</span>
-                        <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Hats</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Norway</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Sweaters</span>
-                        <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Ideas</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Deals</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Accessories</span>
-                        <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">News</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Clothing</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Shopping</span>
-                        <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Jeans</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Trends</span>
-                    </p>
-                </div>
 
-
-            </div>
-            <hr>
             <div class="w3-white w3-margin">
                 <div class="w3-container w3-padding w3-black">
                 </div>
                 <div class="w3-container w3-white">
-                    <h6><button onclick="window.location.href='index.php?r=account%2Findex'" class="w3-btn w3-white w3-padding-large w3-large w3-opacity w3-hover-opacity-off">Start</button></h6>
+                    <h6><button onclick="window.location.href='index.php?r=account%2Findex'" class="w3-btn w3-white w3-padding-large w3-large w3-opacity w3-hover-opacity-off">Começar!</button></h6>
                 </div>
 
 
@@ -170,22 +150,9 @@ and is wrapped around the whole page content, except for the footer in this exam
     <!-- END w3-content -->
 </div>
 
-<!-- Subscribe Modal -->
-<div id="subscribe" class="w3-modal w3-animate-opacity">
-    <div class="w3-modal-content w3-padding-jumbo">
-        <div class="w3-container w3-white">
-            <i onclick="document.getElementById('subscribe').style.display='none'" class="fa fa-remove w3-xlarge w3-closebtn w3-hover-text-grey w3-margin"></i>
-            <h2 class="w3-wide">SUBSCRIBE</h2>
-            <p>Join my mailing list to receive updates on the latest blog posts and other things.</p>
-            <p><input class="w3-input w3-border" type="text" placeholder="Enter e-mail"></p>
-            <button type="button" class="w3-btn-block w3-padding-large w3-red w3-margin-bottom" onclick="document.getElementById('subscribe').style.display='none'">Subscribe</button>
-        </div>
-    </div>
-</div>
-
 <!-- Footer -->
 <footer class="w3-container w3-dark-grey w3-padding-32 w3-padding-xlarge">
-    <a href="#" class="w3-btn w3-padding-large w3-margin-bottom"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+    <a href="" class="w3-btn w3-padding-large w3-margin-bottom"><i class="fa fa-arrow-up w3-margin-right"></i>Para cima</a>
 </footer>
 
 </body>
