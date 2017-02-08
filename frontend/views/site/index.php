@@ -124,10 +124,21 @@ and is wrapped around the whole page content, except for the footer in this exam
             <div class="w3-white w3-margin">
                 <div class="w3-container w3-padding w3-black">
                 </div>
-                <div class="w3-container w3-white">
-                    <h6><button onclick="window.location.href='index.php?r=account%2Findex'" class="w3-btn w3-white w3-padding-large w3-large w3-opacity w3-hover-opacity-off">Começar!</button></h6>
-                </div>
-
+                <?php
+                    if (Yii::$app->user->identity){
+                ?>
+                    <div class="w3-container w3-white">
+                        <h6><button onclick="window.location.href='index.php?r=account%2Findex'" class="w3-btn w3-white w3-padding-large w3-large w3-opacity w3-hover-opacity-off">Começar!</button></h6>
+                    </div>
+                <?php
+                    } else {
+                ?>
+                        <div class="w3-container w3-white">
+                            <h6><button onclick="window.location.href='index.php?r=site%2Flogin'" class="w3-btn w3-white w3-padding-large w3-large w3-opacity w3-hover-opacity-off">Faça login para começar a caçar bots!</button></h6>
+                        </div>
+                <?php
+                    }
+                ?>
 
             </div>
 

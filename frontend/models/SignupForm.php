@@ -23,19 +23,19 @@ class SignupForm extends Model
     {
         return [
             ['username', 'trim'],
-            ['username', 'required'],
-            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
+            ['username', 'required', 'message' => 'Usuário não pode estar em branco'],
+            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'Este username já está sendo usado'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'trim'],
-            ['email', 'required'],
+            ['email', 'required', 'message' => 'Endereço de email não pode estar em branco'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
+            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'Este endereço de email já está sendo usado'],
 
             [['foto'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
 
-            ['password', 'required'],
+            ['password', 'required', 'message' => 'Senha não pode estar em branco'],
             ['password', 'string', 'min' => 6],
         ];
     }
@@ -65,15 +65,18 @@ class SignupForm extends Model
     public function upload()
     {
         $nome= "user_".$this->username;
-        $extensao = $this->foto->extension;
-        if ($this->validate()) {
-            $this->foto->saveAs('users/' . $nome . '.' . $extensao);
-            $this->foto="users/".$nome.'.'.$extensao;
+        if ($this->foto){
+            $extensao = $this->foto->extension;
+            if ($this->validate()) {
+                $this->foto->saveAs('users/' . $nome . '.' . $extensao);
+                $this->foto="users/".$nome.'.'.$extensao;
 
-            return true;
-        } else {
-            return false;
+                return true;
+            } else {
+                return false;
+            }
         }
+        return true;
     }
 
 }
