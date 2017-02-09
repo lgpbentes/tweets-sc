@@ -21,6 +21,7 @@ $this->title = 'Ranking';
 $this->params['breadcrumbs'][] = $this->title;
 
 $users = User::find()->orderBy(["pontuacao"=> SORT_DESC])->all();
+
 ?>
 
 <div class="tweet-index">
@@ -28,21 +29,43 @@ $users = User::find()->orderBy(["pontuacao"=> SORT_DESC])->all();
         <h5></h5>
         <ul class="w3-ul w3-card-4 w3-white">
             <?php
+            $i=1;
+            $total = count($users);
             foreach ($users as $user){
-            ?>
+                ?>
                 <li class="w3-padding-16" width="60px;" >
+
                     <span class="w3-closebtn w3-padding w3-margin-right w3-medium"><?=$user->pontuacao?> pontos</span>
+                    <span class="w3-xlarge">
+                    <?php
+                    if($i==1){
+                        echo"<img src='img/icon_trofeu.png' class='w3-left w3-circle w3-margin-right' style='width:80px; height: 80px'>";
+                    } else if($i>1 && $i<=4){
+                        echo"<img src='img/star.png' class='w3-left w3-circle w3-margin-right' style='width:50px; height: 45px'>";
+                    } elseif ($i>$total-2 && $i<=$total) {
+                        echo"<img src='img/ultimo.png' class='w3-left w3-circle w3-margin-right' style='width:50px; height: 45px'>";
+                    }
+                    else{
+                        echo"<img src='img/branco.png' class='w3-left w3-circle w3-margin-right' style='width:50px; height: 45px'>";
+                    }
+
+                    ?>
+                    </span><br>
                     <?php
                     if($user->foto){
                         echo"<img src='$user->foto' class='w3-left w3-circle w3-margin-right' style='width:50px; height: 50px'>";
                     } else{
                         echo"<img src='users/fake.png' class='w3-left w3-circle w3-margin-right' style='width:50px; height: 50px'>";
                     }
+
+
                     ?>
 
                     <span class="w3-xlarge"><?=$user->username?></span><br>
+
                 </li>
-            <?php
+                <?php
+                $i++;
             }
             ?>
 
