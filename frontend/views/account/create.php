@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model common\models\Account */
 
 $this->title = 'Nova Conta';
-$this->params['breadcrumbs'][] = ['label' => 'Accounts', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Contas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="account-create">

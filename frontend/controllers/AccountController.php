@@ -83,18 +83,39 @@ class AccountController extends Controller
             );
             $url = "https://api.twitter.com/1.1/users/show.json";
             $requestMethod = "GET";
-            $getfield = "?screen_name=$model->username";
             $twitter = new TwitterAPIExchange($settings);
-            $user = $twitter->setGetfield($getfield)
-                ->buildOauth($url, $requestMethod)
-                ->performRequest();
-            $model->user_json = $user;
-            $model->save();
-            return $this->redirect(['view', 'id' => $model->id]);
+
+            $contas = (explode(',',trim($model->username)));
+
+            foreach ($contas as $conta){
+                $model = new Account();
+                $model->username = $conta;
+                $getfield = "?screen_name=$conta";
+
+                $user = $twitter->setGetfield($getfield)
+                    ->buildOauth($url, $requestMethod)
+                    ->performRequest();
+                $model->user_json = $user;
+
+                if (strpos($model->user_json, 'User not found') === false) {
+                    $model->save();
+                }
+            }
+
+
+            return $this->redirect(['index']);
+
         } else {
             return $this->render('create', [
                 'model' => $model,
             ]);
+        }
+    }
+
+    public function actionRetrieveall(){
+        $allAccounts = Account::find()->all();
+        foreach ($allAccounts as $account){
+            $this->actionRetrieve($account->username, 30, $account->id);
         }
     }
 

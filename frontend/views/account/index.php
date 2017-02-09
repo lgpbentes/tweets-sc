@@ -25,6 +25,7 @@ $contas = \common\models\Account::find()->all();
             <?php
             if (Yii::$app->user->identity->username == "admin"){
                 echo Html::a('Nova Conta', ['create'], ['class' => 'btn btn-success']);
+                echo Html::a('Recuperar Tweets', ['retrieveall'], ['class' => 'btn btn-default']);
             }
             ?>
 
